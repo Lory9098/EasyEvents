@@ -1,0 +1,29 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+}
+
+repositories {
+    maven {
+        url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
+    }
+}
+
+dependencies {
+    implementation 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+
+    implementation 'me.clip:placeholderapi:2.11.6'
+    implementation 'com.github.stefvanschie.inventoryframework:IF:0.10.15'
+
+    implementation 'com.zaxxer:HikariCP:4.0.3'
+
+    implementation(project(':EECommon'))
+}
+
+tasks {
+    assemble {
+        dependsOn(shadowJar)
+    }
+    shadowJar {
+        archiveFileName = 'EasyEvents-GAME.jar'
+    }
+}

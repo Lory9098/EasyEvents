@@ -1,0 +1,16 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+}
+
+dependencies {
+    implementation 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+}
+
+tasks {
+    assemble {
+        dependsOn(shadowJar)
+    }
+    shadowJar {
+        archiveFileName = 'EE-COMMON.jar'
+    }
+}

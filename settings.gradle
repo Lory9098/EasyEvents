@@ -1,0 +1,5 @@
+rootProject.name = 'EasyEvents'
+
+include 'EECommon'
+include 'EEGame'
+include 'EEProxy'

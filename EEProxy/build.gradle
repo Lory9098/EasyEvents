@@ -1,0 +1,30 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+}
+
+dependencies {
+    compileOnly("com.velocitypowered:velocity-api:3.3.0-SNAPSHOT")
+    annotationProcessor("com.velocitypowered:velocity-api:3.3.0-SNAPSHOT")
+
+    implementation "dev.dejvokep:boosted-yaml:1.3.1"
+
+    implementation group: 'com.google.inject', name: 'guice', version: '4.0'
+
+    implementation(project(':EECommon'))
+}
+
+tasks {
+    assemble {
+        dependsOn(shadowJar)
+    }
+    shadowJar {
+        archiveFileName = 'EasyEvents-PROXY.jar'
+    }
+}

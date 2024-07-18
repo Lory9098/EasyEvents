@@ -1,0 +1,36 @@
+subprojects {
+    apply plugin: 'java-library'
+
+    group 'it.unixdevelopment'
+    version '1.0.0'
+
+    java {
+        toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    }
+
+    tasks {
+        compileJava {
+            options.encoding = 'UTF-8'
+        }
+        javadoc {
+            options.encoding = 'UTF-8'
+        }
+        processResources {
+            filteringCharset = 'UTF-8'
+        }
+        prepareKotlinBuildScriptModel {}
+        wrapper {}
+        generateTemplates {}
+    }
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+
+    dependencies {
+        implementation 'org.projectlombok:lombok:1.18.20'
+        annotationProcessor 'org.projectlombok:lombok:1.18.20'
+        implementation 'redis.clients:jedis:5.1.3'
+    }
+}

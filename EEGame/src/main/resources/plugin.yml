@@ -1,0 +1,4 @@
+name: EEGame
+version: '${version}'
+main: it.unixdevelopment.eegame.EEGame
+api-version: '1.16'
