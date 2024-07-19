@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EECommon/EasyEvents.EECommon.main.iml" filepath="$PROJECT_DIR$/.idea/modules/EECommon/EasyEvents.EECommon.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EECommon/EasyEvents.EECommon.test.iml" filepath="$PROJECT_DIR$/.idea/modules/EECommon/EasyEvents.EECommon.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EEGame/EasyEvents.EEGame.main.iml" filepath="$PROJECT_DIR$/.idea/modules/EEGame/EasyEvents.EEGame.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EEGame/EasyEvents.EEGame.test.iml" filepath="$PROJECT_DIR$/.idea/modules/EEGame/EasyEvents.EEGame.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EEProxy/EasyEvents.EEProxy.main.iml" filepath="$PROJECT_DIR$/.idea/modules/EEProxy/EasyEvents.EEProxy.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EEProxy/EasyEvents.EEProxy.test.iml" filepath="$PROJECT_DIR$/.idea/modules/EEProxy/EasyEvents.EEProxy.test.iml" />
+    </modules>
+  </component>
+</project>

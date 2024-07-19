@@ -4,11 +4,14 @@ import it.unixdevelopment.eecommon.state.GameState;
 import it.unixdevelopment.eecommon.type.GameType;
 import it.unixdevelopment.eegame.EEGame;
 import it.unixdevelopment.eegame.countdown.Countdown;
+import it.unixdevelopment.eegame.utils.arena.ArenaConfigurationUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -44,13 +47,7 @@ public abstract class Game {
         }
 
         players.add(player);
-        player.teleport(spawnLocation);
 
-        if (gameState == GameState.WAITING && players.size() >= gameType.getMinPlayers()) {
-            gameState = GameState.COUNTDOWN;
-            startCountdown();
-            // qui si potrebbe notificare l'inizio del countdown
-        }
         // qui si potrebbe notificare l'entrata del player
 
         return true;
@@ -60,11 +57,6 @@ public abstract class Game {
         if (players.contains(player)) {
             players.remove(player);
 
-            if (players.size() < gameType.getMinPlayers()) {
-                gameState = GameState.WAITING;
-                stopCountdown();
-                // qui si potrebbe notificare lo stop del countdown
-            }
             // qui si potrebbe notificare l'uscita del player
 
             return true;
@@ -73,7 +65,11 @@ public abstract class Game {
         return false;
     }
 
-    protected void startCountdown() {
+    public void startCountdown() {
+        players.forEach(player -> player.teleport(spawnLocation));
+
+        gameState = GameState.COUNTDOWN;
+
         if (countdown == null) {
             countdown = new Countdown(this, countdownSeconds);
         }
@@ -81,7 +77,7 @@ public abstract class Game {
         countdown.start();
     }
 
-    protected void stopCountdown() {
+    public void stopCountdown() {
         if (countdown != null) {
             countdown.stop();
         }
@@ -127,4 +123,18 @@ public abstract class Game {
      * @param currentSecond il secondo corrente del countdown
      * */
     public abstract void broadcastCountdownMessage(int currentSecond);
+
+    public void setWorld(World world) {
+        World oldWorld = spawnLocation.getWorld();
+        try {
+            ArenaConfigurationUtils.editSpecificArena(getName(), "spawnLocation.world", world.getName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        spawnLocation.setWorld(world);
+        onWorldChange(oldWorld, world);
+    }
+
+    public abstract void onWorldChange(World oldWorld, World newWorld);
 }

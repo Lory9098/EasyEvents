@@ -8,3 +8,18 @@ database:
 redis:
   host: localhost
   port: 6379
+
+
+graphics:
+  null:
+    scoreboard:
+      title: "&6&lEEGame"
+      lines:
+        - "&cI'm supporting PlaceholderAPI!"
+        - "&bHi %player_name%!"
+    tab:
+      header:
+        - "&6&lEEGame"
+        - "&cI'm supporting PlaceholderAPI!"
+      footer:
+        - "&bHi %player_name%!"

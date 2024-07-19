@@ -8,10 +8,9 @@ public enum GameType {
 
     ;
 
-    private final int minPlayers, maxPlayers;
+    private final int maxPlayers;
 
-    GameType(int minPlayers, int maxPlayers) {
-        this.minPlayers = minPlayers;
+    GameType(int maxPlayers) {
         this.maxPlayers = maxPlayers;
     }
 

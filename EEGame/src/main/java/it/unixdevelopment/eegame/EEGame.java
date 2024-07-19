@@ -1,12 +1,17 @@
 package it.unixdevelopment.eegame;
 
+import it.unixdevelopment.eegame.config.Config;
 import it.unixdevelopment.eegame.database.Database;
 import it.unixdevelopment.eegame.hook.PlaceholderHook;
+import it.unixdevelopment.eegame.listeners.PlayerListener;
 import it.unixdevelopment.eegame.manager.GameManager;
 import it.unixdevelopment.eegame.manager.PlayerManager;
 import it.unixdevelopment.eegame.manager.TimeManager;
 import it.unixdevelopment.eegame.redis.RedisListener;
+import it.unixdevelopment.eegame.scoreboard.GameScoreboard;
 import lombok.Getter;
+import me.neznamy.tab.api.TabAPI;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -21,12 +26,14 @@ public final class EEGame extends JavaPlugin {
     private TimeManager timeManager;
     private Database database;
     private JedisPool jedisPool;
+    private FileConfiguration arenasConfig;
 
     @Override
     public void onEnable() {
         instance = this;
 
         saveDefaultConfig();
+        arenasConfig = new Config(this, "arenas.yml").getFileConfiguration();
 
         playerManager = new PlayerManager();
         gameManager = new GameManager();
@@ -46,10 +53,14 @@ public final class EEGame extends JavaPlugin {
         );
 
         try (Jedis jedis = jedisPool.getResource()) {
-            jedis.subscribe(new RedisListener(), "easyevents");
+            jedis.subscribe(new RedisListener(this), "easyevents");
         }
 
         new PlaceholderHook(this).register();
+
+        getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+
+        new GameScoreboard(this, TabAPI.getInstance().getScoreboardManager()).runTaskTimer(this, 0, 5);
     }
 
     @Override

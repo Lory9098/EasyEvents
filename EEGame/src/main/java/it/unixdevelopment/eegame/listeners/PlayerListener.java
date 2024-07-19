@@ -74,7 +74,6 @@ public class PlayerListener implements Listener {
         Game game = instance.getGameManager().getGameByPlayer(player);
 
         if (game == null) {
-            player.kickPlayer("You are not in a game!");
             return;
         }
 

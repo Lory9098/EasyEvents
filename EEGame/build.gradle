@@ -6,6 +6,7 @@ repositories {
     maven {
         url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
     }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -15,6 +16,7 @@ dependencies {
     implementation 'com.github.stefvanschie.inventoryframework:IF:0.10.15'
 
     implementation 'com.zaxxer:HikariCP:4.0.3'
+    compileOnly 'com.github.NEZNAMY:TAB-API:4.1.6'
 
     implementation(project(':EECommon'))
 }
